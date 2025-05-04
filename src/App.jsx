@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router';
 import SharedLayout from './layouts/sharedLayout';
-import Home from './pages/home';
+import Home from './pages/home/home';
 import TopAnime from './pages/top';
 import SeasonalAnime from './pages/seasonal';
 import AnimeDetail from './pages/anime';

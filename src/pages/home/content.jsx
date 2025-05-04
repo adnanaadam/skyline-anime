@@ -4,7 +4,6 @@ import { getTopAnime, getSeasonalAnime } from '@/api/jikan';
 import AnimeCard from '@/components/anime/animeCard';
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router';
-import Hero from '../components/ui/hero';
 
 // Animation variants
 const container = {
@@ -27,7 +26,7 @@ const sectionTitle = {
   show: { opacity: 1, x: 0 },
 };
 
-export default function Home() {
+export default function MainContent() {
   const {
     data: topAnime,
     isLoading: topLoading,
@@ -65,8 +64,6 @@ export default function Home() {
 
   return (
     <div className='min-h-screen bg-gray-900'>
-      <Hero />
-
       {/* Top Anime Section */}
       <section className='px-4 py-16'>
         <div className='container mx-auto'>
