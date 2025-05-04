@@ -10,16 +10,23 @@ export default function SeasonalAnime() {
   });
 
   return (
-    <div className="bg-gray-900 min-h-screen p-4">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-white">Current Season</h1>
+    <div className='min-h-screen bg-gray-900 p-4'>
+      <div className='mb-6 flex items-center justify-between'>
+        <h1 className='text-3xl font-bold text-white'>Current Season</h1>
         <SeasonSelector />
       </div>
 
       {isLoading ? (
-        <div className="text-white">Loading seasonal anime...</div>
+        <div className='grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
+          {[...Array(10)].map((_, i) => (
+            <div
+              key={i}
+              className='aspect-[3/4] animate-pulse rounded-lg bg-gray-800'
+            />
+          ))}
+        </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className='grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
           {data?.data?.map((anime) => (
             <AnimeCard key={anime.mal_id} anime={anime} />
           ))}

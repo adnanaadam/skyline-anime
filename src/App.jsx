@@ -7,6 +7,7 @@ import AnimeDetail from './pages/anime';
 import Search from './pages/search';
 import Genres from './pages/genres';
 import NotFound from './pages/notFound';
+import Wishlist from './pages/watchList';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="genres" element={<Genres />} />
         <Route path="search" element={<Search />} />
         <Route path="anime/:id" element={<AnimeDetail />} />
+        <Route path="wishlist" element={<Wishlist />} />
         
         {/* 404 route - catches all undefined routes */}
         <Route path="*" element={<NotFound />} />

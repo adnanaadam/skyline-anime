@@ -12,26 +12,34 @@ const genres = [
 
 export default function Genres() {
   const [selectedGenre, setSelectedGenre] = useState(genres[0].id);
-  
+
   const { data, isLoading } = useQuery({
     queryKey: ['animeByGenre', selectedGenre],
     queryFn: () => getAnimeByGenre(selectedGenre),
   });
 
   return (
-    <div className="bg-gray-900 min-h-screen p-4">
-      <h1 className="text-3xl font-bold text-white mb-6">Browse by Genre</h1>
-      
-      <GenreSelector 
+    <div className='min-h-screen bg-gray-900 p-4'>
+      <h1 className='mb-6 text-3xl font-bold text-white'>Browse by Genre</h1>
+
+      <GenreSelector
         genres={genres}
         selected={selectedGenre}
         onChange={setSelectedGenre}
       />
 
       {isLoading ? (
-        <div className="text-white mt-4">Loading {genres.find(g => g.id === selectedGenre)?.name} anime...</div>
+        <div className='grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
+          {[...Array(10)].map((_, i) => (
+            <div
+              key={i}
+              className='aspect-[3/4] animate-pulse rounded-lg bg-gray-800'
+            />
+            //    <div className="text-white mt-4">Loading {genres.find(g => g.id === selectedGenre)?.name} anime...</div>
+          ))}
+        </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-6">
+        <div className='mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
           {data?.data?.map((anime) => (
             <AnimeCard key={anime.mal_id} anime={anime} />
           ))}

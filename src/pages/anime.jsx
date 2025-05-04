@@ -10,35 +10,49 @@ export default function AnimeDetail() {
     queryFn: () => getAnimeById(id),
   });
 
-  if (isLoading) return <div className="text-white p-4">Loading anime details...</div>;
+  if (isLoading)
+    return (
+      <div>
+        {isLoading && (
+          <div className='grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'>
+            {[...Array(10)].map((_, i) => (
+              <div
+                key={i}
+                className='aspect-[3/4] animate-pulse rounded-lg bg-gray-800'
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    );
 
   const anime = data?.data;
 
   return (
-    <div className="bg-gray-900 min-h-screen text-white">
+    <div className='min-h-screen bg-gray-900 text-white'>
       <AnimeDetailHeader anime={anime} />
-      
-      <div className="container mx-auto p-4">
-        <div className="flex flex-col md:flex-row gap-8">
-          <div className="md:w-1/3">
-            <img 
-              src={anime.images.webp.large_image_url} 
-              alt={anime.title} 
-              className="w-full rounded-lg shadow-lg"
+
+      <div className='container mx-auto p-4'>
+        <div className='flex flex-col gap-8 md:flex-row'>
+          <div className='md:w-1/3'>
+            <img
+              src={anime.images.webp.large_image_url}
+              alt={anime.title}
+              className='w-full rounded-lg shadow-lg'
             />
           </div>
-          
-          <div className="md:w-2/3">
-            <h2 className="text-2xl font-bold mb-4">Synopsis</h2>
-            <p className="text-gray-300 mb-6">{anime.synopsis}</p>
-            
-            <div className="grid grid-cols-2 gap-4 mb-6">
+
+          <div className='md:w-2/3'>
+            <h2 className='mb-4 text-2xl font-bold'>Synopsis</h2>
+            <p className='mb-6 text-gray-300'>{anime.synopsis}</p>
+
+            <div className='mb-6 grid grid-cols-2 gap-4'>
               <div>
-                <h3 className="font-semibold">Score</h3>
+                <h3 className='font-semibold'>Score</h3>
                 <p>{anime.score || 'N/A'}</p>
               </div>
               <div>
-                <h3 className="font-semibold">Episodes</h3>
+                <h3 className='font-semibold'>Episodes</h3>
                 <p>{anime.episodes || 'N/A'}</p>
               </div>
               {/* Add more details as needed */}

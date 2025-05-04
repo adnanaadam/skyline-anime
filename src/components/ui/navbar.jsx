@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router';
-import { Search, Menu, X } from 'lucide-react';
+import { Search, Menu, X, Heart } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Navbar() {
@@ -20,71 +20,78 @@ export default function Navbar() {
   return (
     <>
       {/* Desktop Navbar */}
-      <nav className="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
+      <nav className='sticky top-0 z-50 border-b border-gray-800 bg-gray-900'>
+        <div className='container mx-auto px-4'>
+          <div className='flex h-16 items-center justify-between'>
             {/* Logo */}
-            <Link to="/" className="flex items-center">
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+            <Link to='/' className='flex items-center'>
+              <span className='bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-xl font-bold text-transparent'>
                 Skyline
               </span>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-6">
-              <Link 
-                to="/top" 
-                className="text-gray-300 hover:text-white transition-colors"
+            <div className='hidden items-center space-x-6 md:flex'>
+              <Link
+                to='/top'
+                className='text-gray-300 transition-colors hover:text-white'
               >
                 Top Anime
               </Link>
-              <Link 
-                to="/seasonal" 
-                className="text-gray-300 hover:text-white transition-colors"
+              <Link
+                to='/seasonal'
+                className='text-gray-300 transition-colors hover:text-white'
               >
                 Seasonal
               </Link>
-              <Link 
-                to="/genres" 
-                className="text-gray-300 hover:text-white transition-colors"
+              <Link
+                to='/genres'
+                className='text-gray-300 transition-colors hover:text-white'
               >
                 Genres
+              </Link>
+              <Link
+                to='/wishlist'
+                className='flex items-center gap-1 text-gray-300 transition-colors hover:text-white'
+              >
+                <Heart className='h-5 w-5' />
+                <span>Wishlist</span>
               </Link>
             </div>
 
             {/* Search and Mobile Menu */}
-            <div className="flex items-center space-x-4">
-              <button 
+            <div className='flex items-center space-x-4'>
+              <button
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="text-gray-300 hover:text-white transition-colors"
-                aria-label="Search"
+                className='text-gray-300 transition-colors hover:text-white'
+                aria-label='Search'
               >
-                <Search className="h-5 w-5" />
+                <Search className='h-5 w-5' />
               </button>
-              
-              <button 
+
+              <button
                 onClick={() => setMobileMenuOpen(true)}
-                className="md:hidden text-gray-300 hover:text-white transition-colors"
-                aria-label="Menu"
+                className='text-gray-300 transition-colors hover:text-white md:hidden'
+                aria-label='Menu'
               >
-                <Menu className="h-5 w-5" />
+                <Menu className='h-5 w-5' />
               </button>
             </div>
           </div>
 
           {/* Search Bar - Desktop */}
           {searchOpen && (
-            <div className="pb-4">
-              <form onSubmit={handleSearch} className="relative">
+            <div className='pb-4'>
+              <form onSubmit={handleSearch} className='relative'>
                 <input
-                  type="text"
-                  placeholder="Search anime..."
-                  className="w-full bg-gray-800 border border-gray-700 rounded-md py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 pl-10"
+                  type='text'
+                  placeholder='Search anime...'
+                  className='w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-2 pl-10 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none'
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   autoFocus
                 />
-                <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                <Search className='absolute top-2.5 left-3 h-5 w-5 text-gray-400' />
               </form>
             </div>
           )}
@@ -93,55 +100,55 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-gray-900/90 z-50 backdrop-blur-sm">
-          <div className="container mx-auto px-4 py-6">
-            <div className="flex justify-between items-center mb-8">
-              <Link 
-                to="/" 
-                className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"
+        <div className='fixed inset-0 z-50 bg-gray-900/90 backdrop-blur-sm'>
+          <div className='container mx-auto px-4 py-6'>
+            <div className='mb-8 flex items-center justify-between'>
+              <Link
+                to='/'
+                className='bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-xl font-bold text-transparent'
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Skyline
               </Link>
-              <button 
+              <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-gray-300 hover:text-white transition-colors"
+                className='text-gray-300 transition-colors hover:text-white'
               >
-                <X className="h-6 w-6" />
+                <X className='h-6 w-6' />
               </button>
             </div>
 
-            <div className="space-y-6">
-              <form onSubmit={handleSearch} className="relative">
+            <div className='space-y-6'>
+              <form onSubmit={handleSearch} className='relative'>
                 <input
-                  type="text"
-                  placeholder="Search anime..."
-                  className="w-full bg-gray-800 border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 pl-12"
+                  type='text'
+                  placeholder='Search anime...'
+                  className='w-full rounded-md border border-gray-700 bg-gray-800 px-4 py-3 pl-12 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none'
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   autoFocus
                 />
-                <Search className="absolute left-4 top-3.5 h-5 w-5 text-gray-400" />
+                <Search className='absolute top-3.5 left-4 h-5 w-5 text-gray-400' />
               </form>
 
-              <nav className="flex flex-col space-y-4 text-lg">
-                <Link 
-                  to="/top" 
-                  className="text-gray-300 hover:text-white transition-colors py-2"
+              <nav className='flex flex-col space-y-4 text-lg'>
+                <Link
+                  to='/top'
+                  className='py-2 text-gray-300 transition-colors hover:text-white'
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Top Anime
                 </Link>
-                <Link 
-                  to="/seasonal" 
-                  className="text-gray-300 hover:text-white transition-colors py-2"
+                <Link
+                  to='/seasonal'
+                  className='py-2 text-gray-300 transition-colors hover:text-white'
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Seasonal
                 </Link>
-                <Link 
-                  to="/genres" 
-                  className="text-gray-300 hover:text-white transition-colors py-2"
+                <Link
+                  to='/genres'
+                  className='py-2 text-gray-300 transition-colors hover:text-white'
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Genres
