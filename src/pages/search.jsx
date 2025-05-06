@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams, useNavigate } from 'react-router';
 import { searchAnime } from '@/api/jikan';
@@ -9,7 +8,6 @@ export default function Search() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const query = searchParams.get('q') || '';
-  const [searchQuery, setSearchQuery] = useState(query);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['search', query],

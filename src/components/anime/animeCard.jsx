@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router';
 import { useAnimeStore } from '@/store/store';
-import { Heart } from 'lucide-react';
+import { Heart, Play } from 'lucide-react';
 import { useState } from 'react';
 
 export default function AnimeCard({ anime, onRemove, isInWishlist = false }) {
@@ -14,7 +14,7 @@ export default function AnimeCard({ anime, onRemove, isInWishlist = false }) {
   const handleWishlistClick = (e) => {
     e.preventDefault(); // Stop event from bubbling
     e.stopPropagation(); // Additional protection
-    
+
     if (isInWishlist) {
       onRemove?.();
     } else if (!alreadyInWishlist) {
@@ -23,9 +23,9 @@ export default function AnimeCard({ anime, onRemove, isInWishlist = false }) {
   };
 
   return (
-    <Link 
+    <Link
       to={`/anime/${anime.mal_id}`}
-      className="block" // Ensure link takes full space
+      className='block' // Ensure link takes full space
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -61,22 +61,37 @@ export default function AnimeCard({ anime, onRemove, isInWishlist = false }) {
             isInWishlist || alreadyInWishlist
               ? 'bg-red-500 hover:bg-red-600'
               : 'bg-gray-800/80 hover:bg-gray-700'
-          } transition-colors z-10`} // Added z-10 to ensure button is above link
+          } z-10 transition-colors`} // Added z-10 to ensure button is above link
         >
-          <Heart 
-            className='h-5 w-5' 
+          <Heart
+            className='h-5 w-5'
             fill={
-              isInWishlist || alreadyInWishlist 
-                ? isHovered ? '#ffffff' : '#f87171' 
+              isInWishlist || alreadyInWishlist
+                ? isHovered
+                  ? '#ffffff'
+                  : '#f87171'
                 : 'transparent'
             }
             stroke={
-              isInWishlist || alreadyInWishlist 
-                ? isHovered ? '#ffffff' : '#f87171' 
+              isInWishlist || alreadyInWishlist
+                ? isHovered
+                  ? '#ffffff'
+                  : '#f87171'
                 : '#ffffff'
             }
           />
         </button>
+        {anime.trailer?.url && (
+          <a
+            href={anime.trailer.url}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='absolute top-12 right-2 z-10 rounded-full bg-gray-800/80 p-2 transition-colors hover:bg-gray-700'
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Play className='h-5 w-5 text-white' />
+          </a>
+        )}
       </motion.div>
     </Link>
   );

@@ -59,3 +59,27 @@ export const getAnimeByGenre = async (genreId) => {
     throw error;
   }
 };
+
+
+// Get anime videos
+export const getAnimeVideos = async (id) => {
+  try {
+    const response = await jikanClient.get(`/anime/${id}/videos`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching anime videos:', error);
+    throw error;
+  }
+};
+
+
+// Get full anime data
+export const getAnimeFull = async (id) => {
+  try {
+    const response = await jikanClient.get(`/anime/${id}/full`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching full anime data:', error);
+    throw error;
+  }
+};
